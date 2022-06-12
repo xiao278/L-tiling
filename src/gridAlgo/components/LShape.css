@@ -1,0 +1,42 @@
+.L-shape-wrapper {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+    display: grid;
+    margin: 0;
+}
+
+.L-base {
+    right: 0;
+    bottom: 0;
+}
+
+.L-top {
+    right: 0px;
+    top: 0px;
+    border-right: 0;
+    border-top: 0;
+    border-left: 0.5px;
+    border-bottom: 3px;
+    border-left-color:black;
+    border-bottom-color: rgb(145, 242, 255);
+    border-style: solid;
+}
+
+.L-left {
+    left: 0;
+    bottom: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-top: 0.5px;
+    border-right: 3px;
+    border-top-color:black;
+    border-right-color: rgb(145, 242, 255);
+    border-style: solid;
+}
+
+.L-blocks {
+    position: absolute;
+    background-color: rgb(145, 242, 255);
+}
