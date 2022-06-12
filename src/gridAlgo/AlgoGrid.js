@@ -3,12 +3,12 @@ import LShape from "./components/LShape";
 import { useEffect, useRef, useState } from "react";
 
 export default function AlgoGrid () {
-    const sqSize = 25;
     const [showShapes, setShowShapes] = useState({
         ready: false,
         placement: {},
         n: 2
     });
+    const sqSize = (showShapes.n <= 4) ? 25 : 13;
     const sideLength = Math.pow(2, showShapes.n);
     const area = Math.pow(sideLength, 2);
 
@@ -32,8 +32,8 @@ export default function AlgoGrid () {
         <div className="grid-container">
             <div className="controller-container">
                 <div className="slider-container">
-                    <p style={{margin: 0}}>Grid size: </p>
-                    <input type="range" min="1" max="4" value={showShapes.n} onInput={(e) => {resetGrid(e.target.value)}}></input>
+                    <p style={{margin: 0}}>Grid size: {sideLength} x {sideLength}</p>
+                    <input type="range" min="1" max="5" value={showShapes.n} onInput={(e) => {resetGrid(e.target.value)}}></input>
                 </div>
                 <button className="clear-button" onClick={() => {resetGrid()}}>Clear</button>
             </div>
