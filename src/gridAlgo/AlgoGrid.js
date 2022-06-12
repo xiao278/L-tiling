@@ -21,9 +21,12 @@ export default function AlgoGrid () {
     }
 
     function gen (hole) {
-        return recGen(hole, {row: 0, col: 0}, sideLength);
+        setShowShapes({
+            ready: true,
+            placement: recGen(hole, {row: 0, col: 0}, sideLength),
+            n: showShapes.n,
+        }) 
     }
-
 
     return (
         <div className="grid-container">
@@ -32,7 +35,7 @@ export default function AlgoGrid () {
                     <p style={{margin: 0}}>Grid size: </p>
                     <input type="range" min="1" max="4" value={showShapes.n} onInput={(e) => {resetGrid(e.target.value)}}></input>
                 </div>
-                <button className="clear-button"></button>
+                <button className="clear-button" onClick={() => {resetGrid()}}>Clear</button>
             </div>
             <div className="grid" style={{
                 height: sqSize * sideLength,
@@ -53,6 +56,9 @@ export default function AlgoGrid () {
                             {
                                 (showShapes.ready && showShapes.placement[i]) ? <LShape hole={showShapes.placement[i]} sqSize={sqSize} /> : <></>
                             }
+                            <div className="grid-button"  onClick={() => {
+                                gen({row: row, col: column});
+                            }}></div>
                         </div>
                     )
                 })}
