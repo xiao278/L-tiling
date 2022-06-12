@@ -10,16 +10,19 @@
 .L-base {
     right: 0;
     bottom: 0;
+    border-width: 0.5px;
+    border-style: solid;
+    border-right-color: black;
+    border-bottom-color: black;
+    border-top-color: rgb(145, 242, 255);
+    border-left-color: rgb(145, 242, 255);
 }
 
 .L-top {
     right: 0px;
     top: 0px;
-    border-right: 0;
-    border-top: 0;
-    border-left: 0.5px;
-    border-bottom: 3px;
-    border-left-color:black;
+    border-width: 0.5px;
+    border-color:black;
     border-bottom-color: rgb(145, 242, 255);
     border-style: solid;
 }
@@ -27,11 +30,8 @@
 .L-left {
     left: 0;
     bottom: 0;
-    border-bottom: 0;
-    border-left: 0;
-    border-top: 0.5px;
-    border-right: 3px;
-    border-top-color:black;
+    border-width: 0.5px;
+    border-color: black;
     border-right-color: rgb(145, 242, 255);
     border-style: solid;
 }

@@ -4,16 +4,17 @@ import { useEffect, useRef, useState } from "react";
 
 export default function AlgoGrid () {
     const sqSize = 25;
-    const n = 2;
-    const sideLength = Math.pow(2, n);
-    const area = Math.pow(sideLength, 2);
     const [showShapes, setShowShapes] = useState({
         ready: false,
-        placement: {}
+        placement: {},
+        n: 2
     });
+    const sideLength = Math.pow(2, showShapes.n);
+    const area = Math.pow(sideLength, 2);
 
-    function resetGrid () {
+    function resetGrid (n = showShapes.n) {
         setShowShapes({
+            n: n,
             ready: false,
             placement: {}
         })
@@ -22,6 +23,42 @@ export default function AlgoGrid () {
     function gen (hole) {
         return recGen(hole, {row: 0, col: 0}, sideLength);
     }
+
+
+    return (
+        <div className="grid-container">
+            <div className="controller-container">
+                <div className="slider-container">
+                    <p style={{margin: 0}}>Grid size: </p>
+                    <input type="range" min="1" max="4" value={showShapes.n} onInput={(e) => {resetGrid(e.target.value)}}></input>
+                </div>
+                <button className="clear-button"></button>
+            </div>
+            <div className="grid" style={{
+                height: sqSize * sideLength,
+                width: sqSize * sideLength,
+            }}>
+                {[...Array(area)].map((nothing, i) => {
+                    const row = Math.floor(i/sideLength);
+                    const column = i % sideLength;
+                    return (
+                        <div style={{
+                            gridRowStart: row + 1,
+                            gridRowEnd: row + 2,
+                            gridColumnStart: column + 1,
+                            gridColumnEnd: column + 2,
+                            height: sqSize,
+                            width: sqSize
+                        }} className="grid-square" key={i}>
+                            {
+                                (showShapes.ready && showShapes.placement[i]) ? <LShape hole={showShapes.placement[i]} sqSize={sqSize} /> : <></>
+                            }
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    );
 
     //hole is abs position of the hole
     //pos is the abs pos of the top left most corner
@@ -102,41 +139,5 @@ export default function AlgoGrid () {
             };
         }
     }
-
-    useEffect(() => {
-        setShowShapes({
-            ready: true,
-            placement: gen({row: 2, col: 2})
-        });
-    }, []);
-
-
-    return (
-        <div className="grid" style={{
-            height: sqSize * sideLength,
-            width: sqSize * sideLength
-        }}>
-        {
-            [...Array(area)].map((nothing, i) => {
-                const row = Math.floor(i/sideLength);
-                const column = i % sideLength;
-                return (
-                    <div style={{
-                        gridRowStart: row + 1,
-                        gridRowEnd: row + 2,
-                        gridColumnStart: column + 1,
-                        gridColumnEnd: column + 2,
-                        height: sqSize,
-                        width: sqSize
-                    }} className="grid-square" key={i}>
-                        {
-                            (showShapes.ready && showShapes.placement[i]) ? <LShape hole={showShapes.placement[i]} /> : <></>
-                        }
-                    </div>
-                )
-            })
-        }
-        </div>
-    )
 }
 
